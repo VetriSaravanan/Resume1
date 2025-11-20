@@ -51,7 +51,7 @@ const themeStyles: Record<TemplateTheme, {
         itemBg: 'bg-creative-card dark:bg-creative-dark-card shadow-lg border border-rose-100 dark:border-transparent', 
         date: 'text-gray-500 dark:text-gray-400', 
         title: 'text-creative-text dark:text-white', 
-        subtitle: 'text-creative-accent dark:text-creative-dark-accent', 
+        subtitle: 'text-white', 
         text: 'text-creative-subtext dark:text-gray-300' 
     },
     minimal: { 
@@ -87,14 +87,15 @@ const themeStyles: Record<TemplateTheme, {
         itemBg: 'bg-matrix-light-card dark:bg-matrix-card border border-matrix-light-accent/20 dark:border-matrix-accent/20 backdrop-blur-sm', 
         date: 'text-matrix-light-text dark:text-matrix-subtext', 
         title: 'text-matrix-light-text dark:text-matrix-text', 
-        subtitle: 'text-matrix-light-accent dark:text-white', 
+        subtitle: 'text-white', 
         text: 'text-matrix-light-text dark:text-matrix-subtext' 
     },
 };
 
-const ExperiencePage: React.FC<ExperiencePageProps> = ({ data, template, isEditing, setResumeData, isExporting }) => {
+const ExperiencePage: React.FC<ExperiencePageProps> = ({ data, template, isEditing, setResumeData, isExporting, resumeData }) => {
     const styles = themeStyles[template];
-    const useAnimations = template === 'matrix' && !isExporting;
+    // Use animations if enabled in data. Default to true if undefined for backward compatibility or new resumes
+    const useAnimations = !!resumeData.enableAnimations;
 
     const handleFieldChange = (id: string, field: keyof Omit<Experience, 'description' | 'id'>) => (value: string) => {
         setResumeData(prevData => {

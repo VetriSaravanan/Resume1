@@ -99,10 +99,10 @@ const PortfolioLayout: React.FC<PortfolioLayoutProps> = (props) => {
 
     }, [template, isDarkMode]);
 
-    // This is the definitive fix for the Matrix theme's animations.
-    // It runs after the component renders and when the route or template changes.
+    // This is the definitive fix for animations for all templates.
+    // It runs after the component renders and when the route or template changes, IF enabled.
     useEffect(() => {
-        if (template !== 'matrix') return;
+        if (!resumeData.enableAnimations) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -127,7 +127,7 @@ const PortfolioLayout: React.FC<PortfolioLayoutProps> = (props) => {
             clearTimeout(timer);
             observer.disconnect();
         };
-    }, [location, template]); // Re-run this effect when the page (location) or template changes
+    }, [location, template, resumeData.enableAnimations]); // Re-run this effect when the page (location), template or animation setting changes
 
 
     const handleSectionOrderChange = useCallback((newOrder: SectionType[]) => {

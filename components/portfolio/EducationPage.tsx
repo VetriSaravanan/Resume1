@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { Education, TemplateTheme, ResumeData } from '../../types';
 import GraduationCapIcon from '../icons/GraduationCapIcon';
@@ -75,9 +74,10 @@ const themeStyles: Record<TemplateTheme, {
     },
 };
 
-const EducationPage: React.FC<EducationPageProps> = ({ data, template, isEditing, setResumeData, isExporting }) => {
+const EducationPage: React.FC<EducationPageProps> = ({ data, template, isEditing, setResumeData, isExporting, resumeData }) => {
     const styles = themeStyles[template];
-    const useAnimations = template === 'matrix' && !isExporting;
+    // Use animations if enabled in data. Default to true if undefined for backward compatibility or new resumes
+    const useAnimations = !!resumeData.enableAnimations;
 
      const handleFieldChange = (id: string, field: keyof Education) => (value: string) => {
         setResumeData(prevData => {

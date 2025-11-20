@@ -71,7 +71,8 @@ const themeStyles: Record<TemplateTheme, {
 
 const HomePage: React.FC<HomePageProps> = ({ data, setResumeData, template, isEditing, isExporting }) => {
     const styles = themeStyles[template];
-    const useAnimations = template === 'matrix' && !isExporting;
+    // Use animations if enabled in data. Default to true if undefined for backward compatibility or new resumes
+    const useAnimations = !!data.enableAnimations;
 
     const handleFieldChange = (field: keyof ResumeData) => (value: string) => {
         setResumeData(prevData => prevData ? { ...prevData, [field]: value } : null);

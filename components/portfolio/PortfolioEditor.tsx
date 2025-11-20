@@ -5,7 +5,8 @@ import SunIcon from '../icons/SunIcon';
 import MoonIcon from '../icons/MoonIcon';
 import PlusCircleIcon from '../icons/PlusCircleIcon';
 import GripVerticalIcon from '../icons/GripVerticalIcon';
-import CodeIcon from '../icons/CodeIcon'; // Using CodeIcon for Typography visual
+import CodeIcon from '../icons/CodeIcon';
+import SparklesIcon from '../icons/SparklesIcon';
 
 interface PortfolioEditorProps {
     isOpen: boolean;
@@ -182,6 +183,13 @@ const PortfolioEditor: React.FC<PortfolioEditorProps> = (props) => {
         });
     };
 
+    const toggleAnimations = () => {
+        setResumeData(prevData => {
+            if (!prevData) return null;
+            return { ...prevData, enableAnimations: !prevData.enableAnimations };
+        });
+    };
+
 
     return (
         <aside className={`no-print fixed top-0 left-0 h-full z-40 bg-primary text-white w-80 p-6 overflow-y-auto transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
@@ -195,9 +203,18 @@ const PortfolioEditor: React.FC<PortfolioEditorProps> = (props) => {
                             {templates.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
                         </select>
                     </div>
-                     <div className="flex items-center justify-between bg-secondary p-2 rounded-md">
+                     <div className="flex items-center justify-between bg-secondary p-2 rounded-md mb-2">
                         <label className="text-sm font-medium text-gray-300 flex items-center gap-2">{isDarkMode ? <MoonIcon /> : <SunIcon />} Mode</label>
                         <button onClick={() => setIsDarkMode(!isDarkMode)} className="px-3 py-1 bg-secondary rounded-md">{isDarkMode ? 'Dark' : 'Light'}</button>
+                    </div>
+                    <div className="flex items-center justify-between bg-secondary p-2 rounded-md">
+                        <label className="text-sm font-medium text-gray-300 flex items-center gap-2"><SparklesIcon className="w-4 h-4" /> Animations</label>
+                        <button 
+                            onClick={toggleAnimations} 
+                            className={`px-3 py-1 rounded-md transition-colors font-medium ${resumeData.enableAnimations ? 'bg-tech-accent text-white' : 'bg-primary text-gray-400'}`}
+                        >
+                            {resumeData.enableAnimations ? 'On' : 'Off'}
+                        </button>
                     </div>
                 </Section>
 

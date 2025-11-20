@@ -115,18 +115,21 @@ export const useResumeParser = () => {
                                     data: base64Data
                                 }
                             },
-                            { text: "Analyze this resume and generate the JSON output based on the system instructions." }
+                            { text: "Extract the data from this resume and structure it into the required JSON format. Do not include markdown formatting." }
                         ]
                     }
                 ],
                 config: {
                     systemInstruction: systemInstruction,
                     responseMimeType: "application/json",
+                    // Increasing temperature helps avoid Recitation blocks on template-like content
+                    temperature: 0.4,
                     safetySettings: [
                         { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
                         { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
                         { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
                         { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE },
+                        { category: HarmCategory.HARM_CATEGORY_CIVIC_INTEGRITY, threshold: HarmBlockThreshold.BLOCK_NONE },
                     ],
                 }
             });
@@ -169,6 +172,9 @@ export const useResumeParser = () => {
             data.hobbies = ensureId(data.hobbies);
             
             if (!data.sectionOrder) data.sectionOrder = ['experience', 'education', 'details'];
+            
+            // Default Animations to false (off by default)
+            if (data.enableAnimations === undefined) data.enableAnimations = false;
 
             setParsedData(data);
         } catch (err: any) {

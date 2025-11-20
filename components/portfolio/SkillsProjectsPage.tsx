@@ -55,7 +55,7 @@ const themeStyles: Record<TemplateTheme, any> = {
         skillText: 'text-creative-accent dark:text-creative-dark-accent', 
         itemBg: 'bg-creative-card dark:bg-creative-dark-card border border-rose-100 dark:border-transparent shadow-lg',
         title: 'text-creative-text dark:text-white',
-        subtitle: 'text-creative-accent dark:text-creative-dark-accent',
+        subtitle: 'text-white',
         text: 'text-creative-subtext dark:text-gray-300',
         date: 'text-gray-500 dark:text-gray-400',
         link: 'text-creative-accent dark:text-creative-dark-accent hover:underline',
@@ -97,7 +97,7 @@ const themeStyles: Record<TemplateTheme, any> = {
         skillText: 'text-matrix-light-accent dark:text-matrix-accent', 
         itemBg: 'bg-matrix-light-card dark:bg-matrix-card border border-matrix-light-accent/20 dark:border-matrix-accent/20 backdrop-blur-sm',
         title: 'text-matrix-light-text dark:text-matrix-text',
-        subtitle: 'text-matrix-light-accent dark:text-white',
+        subtitle: 'text-white',
         text: 'text-matrix-light-text dark:text-matrix-subtext',
         date: 'text-matrix-light-text dark:text-matrix-subtext',
         link: 'text-matrix-light-accent dark:text-matrix-accent hover:underline',
@@ -151,9 +151,10 @@ const SectionRenderer = <T extends { id: string }>({
 };
 
 
-const DetailsPage: React.FC<DetailsPageProps> = ({ data, template, isEditing, setResumeData, isExporting }) => {
+const DetailsPage: React.FC<DetailsPageProps> = ({ data, template, isEditing, setResumeData, isExporting, resumeData }) => {
     const styles = themeStyles[template];
-    const useAnimations = template === 'matrix' && !isExporting;
+    // Use animations if enabled in data. Default to true if undefined for backward compatibility or new resumes
+    const useAnimations = !!resumeData.enableAnimations;
     
     const ensureAbsoluteUrl = (url?: string): string => {
         if (!url) return '#';

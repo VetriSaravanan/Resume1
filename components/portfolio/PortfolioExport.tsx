@@ -66,6 +66,19 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
 };
 
+const getAnimationScript = () => `
+document.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+});
+`;
 
 const PortfolioExport: React.FC<PortfolioExportProps> = ({ resumeData, template, isDarkMode }) => {
     const { name, title, sectionOrder } = resumeData;
@@ -236,6 +249,15 @@ const PortfolioExport: React.FC<PortfolioExportProps> = ({ resumeData, template,
                     background-size: 3rem 3rem;
                     background-position: center center;
                 }
+                .animate-on-scroll {
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+                }
+                .animate-on-scroll.is-visible {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
                  ${resumeData.fonts?.heading ? `h1, h2, h3, h4, h5, h6, .font-heading, .font-serif, .font-sans, .font-mono { font-family: ${resumeData.fonts.heading} !important; }` : ''}
                  ${resumeData.fonts?.body ? `body, p, li, a, span, input, textarea, .font-body { font-family: ${resumeData.fonts.body} !important; }` : ''}
             `}} />
@@ -264,7 +286,13 @@ const PortfolioExport: React.FC<PortfolioExportProps> = ({ resumeData, template,
                 <div data-page="education" style={{display: 'none'}}>{renderPageContent('education')}</div>
                 <div data-page="details" style={{display: 'none'}}>{renderPageContent('details')}</div>
             </main>
+            {/* Inject SPA router script */}
             <script dangerouslySetInnerHTML={{ __html: getSPARouterScript(template) }} />
+            
+            {/* Inject Animation script only if animations are enabled */}
+            {resumeData.enableAnimations && (
+                <script dangerouslySetInnerHTML={{ __html: getAnimationScript() }} />
+            )}
         </body>
         </html>
     );

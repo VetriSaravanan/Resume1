@@ -102,4 +102,5 @@ export interface ResumeData {
         heading: string;
         body: string;
     };
+    enableAnimations?: boolean;
 }
