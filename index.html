@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Instant Portfolio</title>
+    <meta id="meta-description" name="description" content="Turn any resume into a beautiful, modern portfolio website instantly using AI.">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta id="og-title" property="og:title" content="AI Instant Portfolio">
+    <meta id="og-description" property="og:description" content="Turn any resume into a beautiful, modern portfolio website instantly using AI.">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta id="twitter-title" property="twitter:title" content="AI Instant Portfolio">
+    <meta id="twitter-description" property="twitter:description" content="Turn any resume into a beautiful, modern portfolio website instantly using AI.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Playfair+Display:wght@400;600;700;800&family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Oswald:wght@400;500;700&family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@300;400;600;700&family=Source+Sans+3:wght@300;400;600&family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        'primary': '#030014',
+                        'secondary': '#1c1827',
+                        'accent': '#8b5cf6',
+
+                        // Tech Theme (Futuristic: White/Gray vs Deep Space/Purple)
+                        'tech-bg': '#f8fafc',
+                        'tech-card': '#ffffff',
+                        'tech-text': '#0f172a',
+                        'tech-subtext': '#475569',
+                        'tech-accent': '#7c3aed',
+                        'tech-dark-bg': '#030014',
+                        'tech-dark-card': '#111827',
+                        'tech-dark-text': '#e2e8f0',
+                        'tech-dark-subtext': '#94a3b8',
+                        'tech-dark-accent': '#7c3aed',
+
+                        // Professional Theme (Trust: Gray/Blue vs Slate/Blue)
+                        'prof-bg': '#f3f4f6',
+                        'prof-card': '#ffffff',
+                        'prof-text': '#111827',
+                        'prof-subtext': '#4b5563',
+                        'prof-accent': '#0369a1', // darker blue for light mode
+                        'prof-dark-bg': '#111827',
+                        'prof-dark-card': '#1f2937',
+                        'prof-dark-text': '#f9fafb',
+                        'prof-dark-subtext': '#9ca3af',
+                        'prof-dark-accent': '#38bdf8', // lighter blue for dark mode
+
+                        // Creative Theme (Vibrant: Rose/Purple)
+                        'creative-bg': '#fff1f2',
+                        'creative-card': '#ffffff',
+                        'creative-text': '#881337',
+                        'creative-subtext': '#9f1239',
+                        'creative-accent': '#e11d48',
+                        'creative-dark-bg': '#1a050b',
+                        'creative-dark-card': '#3e0d1e',
+                        'creative-dark-text': '#fff1f2',
+                        'creative-dark-subtext': '#ffffff',
+                        'creative-dark-accent': '#fb7185',
+
+                        // Minimal Theme (High Contrast: White/Black vs Black/White)
+                        'minimal-bg': '#ffffff',
+                        'minimal-card': '#ffffff',
+                        'minimal-text': '#000000',
+                        'minimal-subtext': '#52525b',
+                        'minimal-accent': '#000000',
+                        'minimal-dark-bg': '#000000',
+                        'minimal-dark-card': '#18181b',
+                        'minimal-dark-text': '#ffffff',
+                        'minimal-dark-subtext': '#a1a1aa',
+                        'minimal-dark-accent': '#ffffff',
+
+                        // Executive Theme (Premium: Cream/Navy/Gold vs Navy/Gold)
+                        'executive-bg': '#f8fafc',
+                        'executive-card': '#ffffff',
+                        'executive-text': '#0f172a',
+                        'executive-subtext': '#334155',
+                        'executive-accent': '#b45309', // amber-700
+                        'executive-dark-bg': '#0f172a',
+                        'executive-dark-card': '#1e293b',
+                        'executive-dark-text': '#f8fafc',
+                        'executive-dark-subtext': '#cbd5e1',
+                        'executive-dark-accent': '#fbbf24', // amber-400
+
+                        // Matrix Theme (Terminal: Green/Black)
+                        'matrix-bg': '#000000',
+                        'matrix-card': '#0a0a0a',
+                        'matrix-text': '#00ff41',
+                        'matrix-subtext': '#ffffff',
+                        'matrix-accent': '#00ff41',
+                        // Matrix Light (Retro Terminal)
+                        'matrix-light-bg': '#f0fdf4',
+                        'matrix-light-card': '#ffffff',
+                        'matrix-light-text': '#14532d',
+                        'matrix-light-accent': '#16a34a',
+                    },
+                    keyframes: {
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                         'aurora': {
+                            '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.5' },
+                            '50%': { transform: 'scale(1.2) rotate(10deg)', opacity: '0.3' },
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fade-in 0.5s ease-out forwards',
+                        'aurora': 'aurora 8s ease-in-out infinite',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-page-break {
+                page-break-inside: avoid;
+                page-break-before: auto;
+            }
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        .matrix-bg {
+            background-color: #000000;
+            background-image:
+                linear-gradient(rgba(0, 255, 65, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.07) 1px, transparent 1px);
+            background-size: 3rem 3rem;
+            background-position: center center;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+         .animation-delay-3000 {
+            animation-delay: 3s;
+        }
+        .animation-delay-6000 {
+            animation-delay: 6s;
+        }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-primary text-gray-200">
+    <div id="root"></div>
+    <script type="importmap">
+{
+  "imports": {
+    "file-saver": "https://aistudiocdn.com/file-saver@^2.0.5",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@supabase/supabase-js": "https://aistudiocdn.com/@supabase/supabase-js@^2.76.1",
+    "jszip": "https://aistudiocdn.com/jszip@^3.10.1",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "vite": "https://aistudiocdn.com/vite@^7.2.3",
+    "url": "https://aistudiocdn.com/url@^0.11.4"
+  }
+}
+</script>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
